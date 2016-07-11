@@ -7,6 +7,9 @@
 3. Write a designated initializer for setting an optional property.
 4. Write a convenience initializer that passes `nil` into an optional property.
 
+
+Paste the following code snippets in a new Xcode Playground file to see them in action.
+
 ## Optional Properties
 
 Optionals can be used as properties, too, and just like other Types, behave in the same ways that you would expect a loose optional to behave. Unlike non-optional properties, however, optional properties cannot be implicitly typed—they must have a type annotation defining them as an optional—, but they do not require an initial value since they're able to contain `nil`.
