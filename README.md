@@ -2,7 +2,6 @@
 
 ## Objectives
 
-<<<<<<< HEAD
 1. Use optionals as properties.
 2. Allow an optional property to be initialized to `nil`.
 3. Write a designated initializer for setting an optional property.
@@ -165,7 +164,5 @@ class Student {
     }
 }
 ```
-=======
-## Introduction
+
 <a href='https://learn.co/lessons/swift-optional-property' data-visibility='hidden'>View this lesson on Learn.co</a>
->>>>>>> master
