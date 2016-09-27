@@ -108,7 +108,7 @@ phone: 212-555-1212
 
 ### Initializers With Optionals
 
-Even though optional properties are not required for the initialization of a class, they can still be used in initializers. Here's an updated version of the current `Student` class.
+Even though optional properties are not required for the initialization of a class, they can still be used on initializers. Here's an updated version of the current `Student` class.
 
 ```swift
 class Student {
