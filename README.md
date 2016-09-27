@@ -2,118 +2,108 @@
 
 ## Objectives
 
-1. Use optionals as properties.
-2. Allow an optional property to be initialized to `nil`.
+1. Use optionals as properties on a class.
+2. Print optional properties to observe results.
 3. Write a designated initializer for setting an optional property.
 4. Write a convenience initializer that passes `nil` into an optional property.
-
 
 Paste the following code snippets in a new Xcode Playground file to see them in action.
 
 ## Optional Properties
 
-Optionals can be used as properties, too, and just like other Types, behave in the same ways that you would expect a loose optional to behave. Unlike non-optional properties, however, optional properties cannot be implicitly typed—they must have a type annotation defining them as an optional—, but they do not require an initial value since they're able to contain `nil`.
+Optional properties can be used as part of a class just like other non-optional Types. Any property on a class must have a value assigned to it when it's declared or during the initialization of the class. An exception to this rule is when the property is an optional.
 
-An optional property that is not given a default value is automatically initialized to `nil`, allowing those properties to not be covered by initializer. Instead of writing our `Student` class with empty strings as default values:
+By default optionals have the absence of a value which is referred to as `nil`. This comes in handy when certain properties on a class may or may not ever have a value. For example, a `Student` class could have a property called `middleName` that's declared as an optional. This assumes the application does not **_need_** the middle name for its records. Therefore, when the student record is first created, the user will not be required to provide a middle name (_it_ _will_ _be_ _optional_).
 
 ```swift
-//  Student.swift
-
-import Foundation
-
 class Student {
+
+    // Value must be assigned during initialization:
     let username: String
-    var firstName = ""
-    var lastName = ""
-    var email = ""
-    var phone = ""
-    
-    init(username: String) {
-        self.username = username
-    }
-}
-```
 
-```swift
-let mark = Student(username: "markedwardmurray")
-         
-print("username: \(mark.username)")
-print("firstName: \(mark.firstName)")
-print("lastName: \(mark.lastName)")
-print("email: \(mark.email)")
-print("phone: \(mark.phone)")
-```
-This will print:
-
-```
-username: markedwardmurray
-firstName: 
-lastName: 
-email: 
-phone: 
-```
-We can instead choose to make these optional properties, allowing them to be implicitly initialized to `nil`:
-
-```swift
-//  Student.swift
-
-import Foundation
-
-class Student {
-    let username: String
+    // Optionals:
     var firstName: String?
     var lastName: String?
     var email: String?
     var phone: String?
-    
+
+    // Declared with a value:
+    var gpa: Double = 0.0
+
     init(username: String) {
         self.username = username
     }
+
 }
 ```
 
 ```swift
-let mark = Student(username: "markedwardmurray")
-         
-print("username: \(mark.username)")
-print("firstName: \(mark.firstName)")
-print("lastName: \(mark.lastName)")
-print("email: \(mark.email)")
-print("phone: \(mark.phone)")
+// Instance of Student class
+let joe = Student(username: "joelovescode")
+
+print("username: \(joe.username)")
+print("firstName: \(joe.firstName)")
+print("lastName: \(joe.lastName)")
+print("email: \(joe.email)")
+print("phone: \(joe.phone)")
+print("GPA: \(joe.gpa)")
 ```
 This will print:
 
 ```
-username: markedwardmurray
+username: joelovescode
 firstName: nil
 lastName: nil
 email: nil
 phone: nil
+GPA: 0.0
 ```
 
-However, setting those properties to values of the optional's type will save them as optionals that still need to be unwrapped:
+If values are assigned to the optional properties, they will remain unwrapped and require optional binding to check for a value.
 
 ```swift
-let mark = Student(username: "markedwardmurray")
-mark.firstName = "Mark"
-mark.lastName = "Murray"
-mark.email = "markymark@funkybun.ch"
-mark.phone = "(314) 159-2654"
-         
-print("username: \(mark.username)")
-print("firstName: \(mark.firstName)")
-print("lastName: \(mark.lastName)")
-print("email: \(mark.email)")
-print("phone: \(mark.phone)")
+// Values assigned to optional properties
+joe.firstName = "Joe"
+joe.lastName = "Burgess"
+joe.email = "joe@flatironschool.com"
+joe.phone = "212-555-1212"
+
+print("firstName: \(joe.firstName)")
+print("lastName: \(joe.lastName)")
+print("email: \(joe.email)")
+print("phone: \(joe.phone)")
 ```
 This will print:
 
 ```
-username: markedwardmurray
-firstName: Optional("Mark")
-lastName: Optional("Murray")
-email: Optional("markymark@funkybun.ch")
-phone: Optional("(314) 159-2654")
+firstName: Optional("Joe")
+lastName: Optional("Burgess")
+email: Optional("joe@flatironschool.com")
+phone: Optional("212-555-1212")
+```
+Use optional binding to unwrap and assign values to temporary constants.
+
+```swift
+// Unwrapped optional properties
+if
+    let firstName = joe.firstName,
+    let lastName = joe.lastName,
+    let email = joe.email,
+    let phone = joe.phone {
+
+    print("firstName: \(firstName)")
+    print("lastName: \(lastName)")
+    print("email: \(email)")
+    print("phone: \(phone)\n")
+
+}
+```
+This will print:
+```
+firstName: Joe
+lastName: Burgess
+email: joe@flatironschool.com
+phone: 212-555-1212
 ```
 
 ### Initializers With Optionals
@@ -131,7 +121,7 @@ class Student {
     var lastName: String?
     var email: String?
     var phone: String?
-    
+
     init(username: String, firstName: String?, lastName: String?) {
         self.username = username
         self.firstName = firstName
@@ -152,7 +142,7 @@ class Student {
     var lastName: String?
     var email: String?
     var phone: String?
-    
+
     init(username: String, firstName: String?, lastName: String?) {
         self.username = username
         self.firstName = firstName
