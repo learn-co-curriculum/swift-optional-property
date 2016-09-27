@@ -18,16 +18,16 @@ By default optionals have the absence of a value which is referred to as `nil`. 
 ```swift
 class Student {
 
-    // Value must be assigned during initialization:
+    // Value must be assigned during initialization
     let username: String
 
-    // Optionals:
+    // Optionals
     var firstName: String?
     var lastName: String?
     var email: String?
     var phone: String?
 
-    // Declared with a value:
+    // Declared with a value
     var gpa: Double = 0.0
 
     init(username: String) {
@@ -59,7 +59,7 @@ phone: nil
 GPA: 0.0
 ```
 
-If values are assigned to the optional properties, they will remain unwrapped and require optional binding to check for a value.
+If values are assigned to the optional properties, they will remain wrapped and require optional binding to check for a value.
 
 ```swift
 // Values assigned to optional properties
@@ -108,6 +108,7 @@ phone: 212-555-1212
 
 ### Initializers With Optionals
 
+Even though 
 While the argument types of initializers are defined separately from the properties that they initialize, it's best to keep them synchronized. Optional properties that are covered by initializers should probably accept an optional as well. This is as simple as changing the initializer's argument types to optionals:
 
 ```swift
