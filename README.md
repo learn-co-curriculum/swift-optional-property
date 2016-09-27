@@ -108,51 +108,61 @@ phone: 212-555-1212
 
 ### Initializers With Optionals
 
-Even though 
-While the argument types of initializers are defined separately from the properties that they initialize, it's best to keep them synchronized. Optional properties that are covered by initializers should probably accept an optional as well. This is as simple as changing the initializer's argument types to optionals:
+Even though optional properties are not required for the initialization of a class, they can still be used in initializers. Here's an updated version of the current `Student` class.
 
 ```swift
-//  Student.swift
-
-import Foundation
-
 class Student {
+
+    // Value must be assigned during initialization
     let username: String
+
+    // Optionals
     var firstName: String?
     var lastName: String?
     var email: String?
     var phone: String?
 
+    // Declared with a value
+    var gpa: Double = 0.0
+
+    // Designated initializer with optionals
     init(username: String, firstName: String?, lastName: String?) {
         self.username = username
         self.firstName = firstName
         self.lastName = lastName
     }
+
 }
 ```
-We can then set up a convenience initializer that passes in `nil` to the optional arguments on the designated initializer (this is in contrast to passing in an empty string in previous examples without the use of optionals):
+The original initializer that only took a username argument can now be used as a convenience initializer (Notice that the convenience initializer must include a call to the designated initializer). If multiple initializers seem confusing, remember that they are there to allow for creating instances of class objects under varying circumstances. In the example below the convenience initializer can be used when you know only a username will be provided by the user. 
 
 ```swift
-//  Student.swift
-
-import Foundation
-
 class Student {
+    
+    // Value must be assigned during initialization
     let username: String
+    
+    // Optionals
     var firstName: String?
     var lastName: String?
     var email: String?
     var phone: String?
-
+    
+    // Declared with a value
+    var gpa: Double = 0.0
+    
+    // Designated initializer with optionals
     init(username: String, firstName: String?, lastName: String?) {
         self.username = username
         self.firstName = firstName
         self.lastName = lastName
     }
-
+    
+    // Convenience initializer
     convenience init(username: String) {
         self.init(username: username, firstName: nil, lastName: nil)
     }
+    
 }
 ```
 
